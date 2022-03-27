@@ -1,0 +1,36 @@
+{
+  "name": "twitter-api-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/tsubasa1122/twitter-api-typescript.git",
+  "author": "tsubasa <tsubasan1122@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "node-fetch": "^3.2.3",
+    "ts-node": "^10.7.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "@types/node-fetch": "^2.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.1",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.3"
+  }
+}
