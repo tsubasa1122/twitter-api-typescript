@@ -1,4 +1,5 @@
 import Client from "twitter-api-sdk";
+import UserEntity from "../../entities/twitter/userEntity";
 
 const MAX_RESULT = 100;
 
@@ -7,25 +8,44 @@ const MAX_RESULT = 100;
  * @param client TwitterのAPI Client
  */
 export default class UserRepository {
-  constructor(public client: Client) {
+  constructor(private client: Client) {
     this.client = client;
   }
 
-  async findFollowers(id: string) {
-    const tweet = await this.client.users.usersIdFollowers("448507447", {
+  /**
+   * idで指定したユーザーのフォローしているユーザー一覧を取得する
+   * @param id ユーザーのid
+   */
+  async findFollowers(id: string): Promise<UserEntity[]> {
+    const response = await this.client.users.usersIdFollowers(id, {
       max_results: MAX_RESULT,
     });
-    console.log(tweet?.data);
+    if (!response.data) return [];
+
+    return response.data.map(({ id, name, username }) => {
+      return new UserEntity(id, name, username);
+    });
   }
 
-  async searchByTweet(content: string) {
+  /**
+   * contentで指定した内容を含むツイートを行ったユーザー一覧を取得する
+   * @param content ツイート内容
+   */
+  async searchByTweet(content: string): Promise<UserEntity[]> {
     // 本当はtweetsFullarchiveSearchを使いたいがOAUTH周りの設定が面倒だったので一旦Recentを使う
-    const tweet = await this.client.tweets.tweetsRecentSearch({
-      query: "test",
+    const response = await this.client.tweets.tweetsRecentSearch({
+      query: content,
       max_results: MAX_RESULT,
       expansions: ["author_id"],
-      "user.fields": ["username"],
+      "user.fields": ["id", "name", "username", "description"],
     });
-    console.log(tweet?.includes?.users?.length);
+
+    if (!response.includes || !response.includes.users) return [];
+
+    return response.includes.users.map(
+      ({ id, name, username, description }) => {
+        return new UserEntity(id, name, username, description);
+      }
+    );
   }
 }
