@@ -13,6 +13,7 @@
     "lint:fix": "eslint src/**/*.ts --fix"
   },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "node-fetch": "^3.2.3",
     "ts-node": "^10.7.0",
