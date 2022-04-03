@@ -9,5 +9,6 @@ module.exports = {
   },
   coverageDirectory: "./coverage/",
   moduleFileExtensions: ["ts", "js", "json"],
+  testPathIgnorePatterns: ["/__tests__/testData"],
   collectCoverageFrom: ["**/*.(t|j)s"],
 };
