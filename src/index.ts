@@ -1,5 +1,6 @@
 import express, { Request, RequestHandler, Response } from "express";
 import Router from "express-promise-router";
+import cors from "cors";
 import { Client } from "twitter-api-sdk";
 import UserRepository from "./repositories/twitter/userRepository";
 import dotenv from "dotenv";
@@ -10,15 +11,8 @@ const router = Router();
 const PORT = 8000;
 
 app.use(express.json());
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(cors());
 
 router.get("/", (_, res: Response) => res.send("ok!!"));
 
