@@ -8,9 +8,7 @@ const MAX_RESULT = 100;
  * @param client TwitterのAPI Client
  */
 export default class UserRepository {
-  constructor(private client: Client) {
-    this.client = client;
-  }
+  constructor(private client: Client) {}
 
   /**
    * idで指定したユーザーのフォローしているユーザー一覧を取得する
